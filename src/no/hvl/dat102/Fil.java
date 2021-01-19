@@ -64,6 +64,10 @@ public class Fil {
 			}
 		} catch(FileNotFoundException e) {
 			System.out.println("Feil ved lesing fra fil: " + e);
+		} finally {
+			if(sc != null) {
+				sc.close();
+			}
 		}
 
 		return fa;
