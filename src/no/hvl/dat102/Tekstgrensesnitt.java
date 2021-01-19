@@ -14,7 +14,7 @@ public class Tekstgrensesnitt {
 		String produsent = sc.nextLine();
 		System.out.print("Tittel: ");
 		String tittel = sc.nextLine();
-		System.out.print("�rstall: ");
+		System.out.print("Årstall: ");
 		int aarstall = Integer.parseInt(sc.nextLine());
 		System.out.print("Sjanger: ");
 		Sjanger sjanger = Sjanger.valueOf(sc.nextLine().toUpperCase());
@@ -28,7 +28,7 @@ public class Tekstgrensesnitt {
 		System.out.println("Filmnr: " + film.getFilmnr());
 		System.out.println("Produsent: " + film.getProdusent());
 		System.out.println("Tittel: " + film.getTittel());
-		System.out.println("�rstall: " + film.getAarstall());
+		System.out.println("Årstall: " + film.getAarstall());
 		System.out.println("Sjanger: " + film.getSjanger());
 		System.out.println("Filmselskap: " + film.getFilmselskap());
 	}
