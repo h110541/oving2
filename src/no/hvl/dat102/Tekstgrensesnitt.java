@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class Tekstgrensesnitt {
 
-	public Film lesFilm() {
-		Scanner sc = new Scanner(System.in);
+	private static Scanner sc = new Scanner(System.in);
 
+	public Film lesFilm() {
 		System.out.print("Filmnr: ");
 		int filmnr = Integer.parseInt(sc.nextLine());
 		System.out.print("Produsent: ");
