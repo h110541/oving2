@@ -4,8 +4,14 @@ import no.hvl.dat102.adt.FilmarkivADT;
 
 public class Filmarkiv implements FilmarkivADT {
 
+	private static final int STANDARD_KAPASITET = 10;
+
 	private int antall;
 	private Film[] filmer;
+
+	public Filmarkiv() {
+		this(STANDARD_KAPASITET);
+	}
 
 	public Filmarkiv(int kapasitet) {
 		antall = 0;
