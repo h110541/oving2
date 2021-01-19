@@ -20,6 +20,7 @@ public class Tekstgrensesnitt {
 		Sjanger sjanger = Sjanger.valueOf(sc.nextLine().toUpperCase());
 		System.out.print("Filmselskap: ");
 		String filmselskap = sc.nextLine();
+		System.out.println();
 
 		return new Film(filmnr, produsent, tittel, aarstall, sjanger, filmselskap);
 	}
@@ -31,6 +32,7 @@ public class Tekstgrensesnitt {
 		System.out.println("Årstall: " + film.getAarstall());
 		System.out.println("Sjanger: " + film.getSjanger());
 		System.out.println("Filmselskap: " + film.getFilmselskap());
+		System.out.println();
 	}
 
 	public void skrivUtFilmDelstrengITittel(FilmarkivADT fa, String delstreng) {
@@ -55,6 +57,8 @@ public class Tekstgrensesnitt {
 		for(Sjanger sjanger : Sjanger.values()) {
 			System.out.format("Antall filmer i sjangeren %s: %d%n", sjanger, fa.antall(sjanger));
 		}
+
+		System.out.println();
 	}
 
 }

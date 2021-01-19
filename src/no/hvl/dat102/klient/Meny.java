@@ -19,11 +19,13 @@ public class Meny {
 	public void start() {
 		System.out.print("Nytt arkiv (1), eller eksisterende (2): ");
 		String valg = sc.nextLine();
+		System.out.println();
 
 		if(valg.equals("2")) {
 			System.out.print("Oppgi filnavn: ");
 			String filnavn = sc.nextLine();
 			fa = Fil.lesFraFil(filnavn);
+			System.out.println();
 		}
 
 		hovedmeny();
@@ -39,10 +41,10 @@ public class Meny {
 			System.out.println("Vis filmer, søk på produsent (3)");
 			System.out.println("Skriv ut statistikk (4)");
 			System.out.println("Lagre filmarkiv (5)");
-			System.out.println("Avslutt (6)");
-
+			System.out.println("Avslutt (6)\n");
 			System.out.print("Ditt valg: ");
 			valg = sc.nextLine();
+			System.out.println();
 
 			if(valg.equals("1")) {
 				Film film = tekstgr.lesFilm();
@@ -50,16 +52,19 @@ public class Meny {
 			} else if(valg.equals("2")) {
 				System.out.print("Oppgi delstreng i tittel: ");
 				String tittel = sc.nextLine();
+				System.out.println();
 				tekstgr.skrivUtFilmDelstrengITittel(fa, tittel);
 			} else if(valg.equals("3")) {
 				System.out.print("Oppgi delstreng i produsent: ");
 				String produsent = sc.nextLine();
+				System.out.println();
 				tekstgr.skrivUtFilmProdusent(fa, produsent);
 			} else if(valg.equals("4")) {
 				tekstgr.skrivUtStatistikk(fa);
 			} else if(valg.equals("5")) {
 				System.out.print("Oppgi filnavn: ");
 				String filnavn = sc.nextLine();
+				System.out.println();
 				Fil.skrivTilFil(fa, filnavn);
 			} else if(valg.equals("6")) {
 				ferdig = true;
