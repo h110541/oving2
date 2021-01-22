@@ -7,7 +7,11 @@ import java.util.Scanner;
 
 public class Tekstgrensesnitt {
 
-	private static Scanner sc = new Scanner(System.in);
+	private Scanner sc;
+
+	public Tekstgrensesnitt(Scanner sc) {
+		this.sc = sc;
+	}
 
 	public Film lesFilm() {
 		System.out.print("Filmnr: ");

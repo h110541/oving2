@@ -13,8 +13,8 @@ public class Meny {
 
 	public Meny(FilmarkivADT fa) {
 		this.fa = fa;
-		tekstgr = new Tekstgrensesnitt();
 		sc = new Scanner(System.in);
+		tekstgr = new Tekstgrensesnitt(sc);
 	}
 
 	public void start() {
