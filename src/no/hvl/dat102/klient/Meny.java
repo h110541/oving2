@@ -38,11 +38,12 @@ public class Meny {
 
 		while(!ferdig) {
 			System.out.println("Legg til film (1)");
-			System.out.println("Vis filmer, søk på tittel (2)");
-			System.out.println("Vis filmer, søk på produsent (3)");
-			System.out.println("Skriv ut statistikk (4)");
-			System.out.println("Lagre filmarkiv (5)");
-			System.out.println("Avslutt (6)\n");
+			System.out.println("Slett film (2)");
+			System.out.println("Vis filmer, søk på tittel (3)");
+			System.out.println("Vis filmer, søk på produsent (4)");
+			System.out.println("Skriv ut statistikk (5)");
+			System.out.println("Lagre filmarkiv (6)");
+			System.out.println("Avslutt (7)\n");
 			System.out.print("Ditt valg: ");
 			valg = sc.nextLine();
 			System.out.println();
@@ -51,23 +52,31 @@ public class Meny {
 				Film film = tekstgr.lesFilm();
 				fa.leggTilFilm(film);
 			} else if(valg.equals("2")) {
+				System.out.print("Oppgi filmnr: ");
+				int filmnr = Integer.parseInt(sc.nextLine());
+				if(fa.slettFilm(filmnr)) {
+					System.out.println("\nFilmen ble slettet\n");
+				} else {
+					System.out.println("\nFant ikke filmen i arkivet\n");
+				}
+			} else if(valg.equals("3")) {
 				System.out.print("Oppgi delstreng i tittel: ");
 				String tittel = sc.nextLine();
 				System.out.println();
 				tekstgr.skrivUtFilmDelstrengITittel(fa, tittel);
-			} else if(valg.equals("3")) {
+			} else if(valg.equals("4")) {
 				System.out.print("Oppgi delstreng i produsent: ");
 				String produsent = sc.nextLine();
 				System.out.println();
 				tekstgr.skrivUtFilmProdusent(fa, produsent);
-			} else if(valg.equals("4")) {
-				tekstgr.skrivUtStatistikk(fa);
 			} else if(valg.equals("5")) {
+				tekstgr.skrivUtStatistikk(fa);
+			} else if(valg.equals("6")) {
 				System.out.print("Oppgi filnavn: ");
 				String filnavn = sc.nextLine();
 				System.out.println();
 				Fil.skrivTilFil(fa, filnavn);
-			} else if(valg.equals("6")) {
+			} else if(valg.equals("7")) {
 				ferdig = true;
 			}
 
