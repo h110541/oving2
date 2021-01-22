@@ -31,7 +31,7 @@ public class Fil {
 				pw.println(filmLinje);
 			}
 		} catch(FileNotFoundException e) {
-			System.out.println("Feil ved skriving til fil: " + e);
+			System.out.println("Feil ved skriving til fil: " + e + "\n");
 		} finally {
 			if(pw != null) {
 				pw.close();
@@ -64,6 +64,7 @@ public class Fil {
 			}
 		} catch(FileNotFoundException e) {
 			System.out.println("Feil ved lesing fra fil: " + e);
+			System.exit(1);
 		} finally {
 			if(sc != null) {
 				sc.close();
