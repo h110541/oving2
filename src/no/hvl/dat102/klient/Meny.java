@@ -78,6 +78,8 @@ public class Meny {
 				Fil.skrivTilFil(fa, filnavn);
 			} else if(valg.equals("7")) {
 				ferdig = true;
+			} else {
+				System.out.println("Ugyldig valg\n");
 			}
 
 		}
