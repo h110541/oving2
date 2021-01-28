@@ -63,11 +63,12 @@ public class Filmarkiv implements FilmarkivADT {
 
 	@Override
 	public Film[] soekTittel(String delstreng) {
+		String delstrengLower = delstreng.toLowerCase();
 		Film[] resultatTab = new Film[antall];
 		int antallMatches = 0;
 
 		for(int i = 0; i < antall; i++) {
-			if(filmer[i].getTittel().contains(delstreng)) {
+			if(filmer[i].getTittel().toLowerCase().contains(delstrengLower)) {
 				resultatTab[antallMatches] = filmer[i];
 				antallMatches++;
 			}
@@ -78,11 +79,12 @@ public class Filmarkiv implements FilmarkivADT {
 
 	@Override
 	public Film[] soekProdusent(String delstreng) {
+		String delstrengLower = delstreng.toLowerCase();
 		Film[] resultatTab = new Film[antall];
 		int antallMatches = 0;
 
 		for(int i = 0; i < antall; i++) {
-			if(filmer[i].getProdusent().contains(delstreng)) {
+			if(filmer[i].getProdusent().toLowerCase().contains(delstrengLower)) {
 				resultatTab[antallMatches] = filmer[i];
 				antallMatches++;
 			}
