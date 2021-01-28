@@ -31,30 +31,35 @@ public class Tekstgrensesnitt {
 		return new Film(filmnr, produsent, tittel, aarstall, sjanger, filmselskap);
 	}
 
+	public void visOverskrift() {
+		System.out.format("%-10s %-20s %-20s %-20s %-20s %-20s%n%n", "Filmnr", "Produsent", "Tittel", "Årstall", "Sjanger", "Filmselskap");
+	}
+
 	public void visFilm(Film film) {
-		System.out.println("Filmnr: " + film.getFilmnr());
-		System.out.println("Produsent: " + film.getProdusent());
-		System.out.println("Tittel: " + film.getTittel());
-		System.out.println("Årstall: " + film.getAarstall());
-		System.out.println("Sjanger: " + film.getSjanger());
-		System.out.println("Filmselskap: " + film.getFilmselskap());
-		System.out.println();
+		System.out.format("%-10d %-20s %-20s %-20d %-20s %-20s%n", film.getFilmnr(), film.getProdusent(), film.getTittel(),
+				film.getAarstall(), film.getSjanger(), film.getFilmselskap());
 	}
 
 	public void skrivUtFilmDelstrengITittel(FilmarkivADT fa, String delstreng) {
 		Film[] filmer = fa.soekTittel(delstreng);
+		visOverskrift();
 
 		for(Film film : filmer) {
 			visFilm(film);
 		}
+
+		System.out.println();
 	}
 
 	public void skrivUtFilmProdusent(FilmarkivADT fa, String delstreng) {
 		Film[] filmer = fa.soekProdusent(delstreng);
+		visOverskrift();
 
 		for(Film film : filmer) {
 			visFilm(film);
 		}
+
+		System.out.println();
 	}
 
 	public void skrivUtStatistikk(FilmarkivADT fa) {
