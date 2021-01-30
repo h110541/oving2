@@ -1,87 +1,93 @@
 package no.hvl.dat102.klient;
 
-import no.hvl.dat102.Fil;
 import no.hvl.dat102.Film;
 import no.hvl.dat102.adt.FilmarkivADT;
-import java.util.Scanner;
 
 public class Meny {
 
+	private static final String STARTMENY_TEKST =
+			"[1] Nytt arkiv\n" +
+			"[2] Åpne eksisterende arkiv\n\n" +
+			"Ditt valg: ";
+
+	private static final String HOVEDMENY_TEKST =
+			"[1] Legg til film\n" +
+			"[2] Slett film\n" +
+			"[3] Vis filmer, søk på tittel\n" +
+			"[4] Vis filmer, søk på produsent\n" +
+			"[5] Skriv ut statistikk\n" +
+			"[6] Lagre filmarkiv\n" +
+			"[7] Avslutt\n\n" +
+			"Ditt valg: ";
+
 	private FilmarkivADT fa;
 	private Tekstgrensesnitt tekstgr;
-	private Scanner sc;
 
 	public Meny(FilmarkivADT fa) {
 		this.fa = fa;
-		sc = new Scanner(System.in);
-		tekstgr = new Tekstgrensesnitt(sc);
+		tekstgr = new Tekstgrensesnitt();
 	}
 
 	public void start() {
-		System.out.print("Nytt arkiv (1), eller eksisterende (2): ");
-		String valg = sc.nextLine();
-		System.out.println();
+		int valg;
+		boolean ferdig = false;
 
-		if(valg.equals("2")) {
-			System.out.print("Oppgi filnavn: ");
-			String filnavn = sc.nextLine();
-			fa = Fil.lesFraFil(filnavn);
+		while(!ferdig) {
+			System.out.print(STARTMENY_TEKST);
+			valg = tekstgr.lesInt();
 			System.out.println();
+
+			switch(valg) {
+				case 1:
+					ferdig = true;
+					break;
+				case 2:
+					fa = tekstgr.lastFilmarkiv();
+					ferdig = true;
+					break;
+				default:
+					System.out.println("Ugyldig valg\n");
+			}
 		}
 
 		hovedmeny();
 	}
 
 	private void hovedmeny() {
-		String valg;
+		int valg;
 		boolean ferdig = false;
 
 		while(!ferdig) {
-			System.out.println("Legg til film (1)");
-			System.out.println("Slett film (2)");
-			System.out.println("Vis filmer, søk på tittel (3)");
-			System.out.println("Vis filmer, søk på produsent (4)");
-			System.out.println("Skriv ut statistikk (5)");
-			System.out.println("Lagre filmarkiv (6)");
-			System.out.println("Avslutt (7)\n");
-			System.out.print("Ditt valg: ");
-			valg = sc.nextLine();
+			System.out.print(HOVEDMENY_TEKST);
+			valg = tekstgr.lesInt();
 			System.out.println();
 
-			if(valg.equals("1")) {
-				Film film = tekstgr.lesFilm();
-				fa.leggTilFilm(film);
-			} else if(valg.equals("2")) {
-				System.out.print("Oppgi filmnr: ");
-				int filmnr = Integer.parseInt(sc.nextLine());
-				if(fa.slettFilm(filmnr)) {
-					System.out.println("\nFilmen ble slettet\n");
-				} else {
-					System.out.println("\nFant ikke filmen i arkivet\n");
-				}
-			} else if(valg.equals("3")) {
-				System.out.print("Oppgi delstreng i tittel: ");
-				String tittel = sc.nextLine();
-				System.out.println();
-				tekstgr.skrivUtFilmDelstrengITittel(fa, tittel);
-			} else if(valg.equals("4")) {
-				System.out.print("Oppgi delstreng i produsent: ");
-				String produsent = sc.nextLine();
-				System.out.println();
-				tekstgr.skrivUtFilmProdusent(fa, produsent);
-			} else if(valg.equals("5")) {
-				tekstgr.skrivUtStatistikk(fa);
-			} else if(valg.equals("6")) {
-				System.out.print("Oppgi filnavn: ");
-				String filnavn = sc.nextLine();
-				System.out.println();
-				Fil.skrivTilFil(fa, filnavn);
-			} else if(valg.equals("7")) {
-				ferdig = true;
-			} else {
-				System.out.println("Ugyldig valg\n");
+			switch(valg) {
+				case 1:
+					Film film = tekstgr.lesFilm();
+					fa.leggTilFilm(film);
+					break;
+				case 2:
+					tekstgr.slettFilm(fa);
+					break;
+				case 3:
+					tekstgr.skrivUtFilmDelstrengITittel(fa);
+					break;
+				case 4:
+					tekstgr.skrivUtFilmProdusent(fa);
+					break;
+				case 5:
+					tekstgr.skrivUtStatistikk(fa);
+					break;
+				case 6:
+					tekstgr.lagreFilmarkiv(fa);
+					break;
+				case 7:
+					ferdig = true;
+					break;
+				default:
+					System.out.println("Ugyldig valg\n");
 			}
-
 		}
 	}
 

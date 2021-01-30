@@ -1,5 +1,6 @@
 package no.hvl.dat102.klient;
 
+import no.hvl.dat102.Fil;
 import no.hvl.dat102.Film;
 import no.hvl.dat102.Sjanger;
 import no.hvl.dat102.adt.FilmarkivADT;
@@ -9,19 +10,19 @@ public class Tekstgrensesnitt {
 
 	private Scanner sc;
 
-	public Tekstgrensesnitt(Scanner sc) {
-		this.sc = sc;
+	public Tekstgrensesnitt() {
+		sc = new Scanner(System.in);
 	}
 
 	public Film lesFilm() {
 		System.out.print("Filmnr: ");
-		int filmnr = Integer.parseInt(sc.nextLine());
+		int filmnr = lesInt();
 		System.out.print("Produsent: ");
 		String produsent = sc.nextLine();
 		System.out.print("Tittel: ");
 		String tittel = sc.nextLine();
 		System.out.print("Årstall: ");
-		int aarstall = Integer.parseInt(sc.nextLine());
+		int aarstall = lesInt();
 		System.out.print("Sjanger: ");
 		Sjanger sjanger = Sjanger.valueOf(sc.nextLine().toUpperCase());
 		System.out.print("Filmselskap: ");
@@ -29,6 +30,16 @@ public class Tekstgrensesnitt {
 		System.out.println();
 
 		return new Film(filmnr, produsent, tittel, aarstall, sjanger, filmselskap);
+	}
+
+	public void slettFilm(FilmarkivADT fa) {
+		System.out.print("Oppgi filmnr: ");
+		int filmnr = lesInt();
+		if(fa.slettFilm(filmnr)) {
+			System.out.println("\nFilmen ble slettet\n");
+		} else {
+			System.out.println("\nFant ikke filmen i arkivet\n");
+		}
 	}
 
 	public void visOverskrift() {
@@ -51,6 +62,13 @@ public class Tekstgrensesnitt {
 		System.out.println();
 	}
 
+	public void skrivUtFilmDelstrengITittel(FilmarkivADT fa) {
+		System.out.print("Oppgi delstreng i tittel: ");
+		String tittel = sc.nextLine();
+		System.out.println();
+		skrivUtFilmDelstrengITittel(fa, tittel);
+	}
+
 	public void skrivUtFilmProdusent(FilmarkivADT fa, String delstreng) {
 		Film[] filmer = fa.soekProdusent(delstreng);
 		visOverskrift();
@@ -62,6 +80,13 @@ public class Tekstgrensesnitt {
 		System.out.println();
 	}
 
+	public void skrivUtFilmProdusent(FilmarkivADT fa) {
+		System.out.print("Oppgi delstreng i produsent: ");
+		String produsent = sc.nextLine();
+		System.out.println();
+		skrivUtFilmProdusent(fa, produsent);
+	}
+
 	public void skrivUtStatistikk(FilmarkivADT fa) {
 		System.out.println("Antall filmer totalt: " + fa.antall());
 
@@ -70,6 +95,40 @@ public class Tekstgrensesnitt {
 		}
 
 		System.out.println();
+	}
+
+	public void lagreFilmarkiv(FilmarkivADT fa) {
+		System.out.print("Oppgi filnavn: ");
+		String filnavn = sc.nextLine();
+		System.out.println();
+		Fil.skrivTilFil(fa, filnavn);
+	}
+
+	public FilmarkivADT lastFilmarkiv() {
+		System.out.print("Oppgi filnavn: ");
+		String filnavn = sc.nextLine();
+		System.out.println();
+
+		FilmarkivADT fa = Fil.lesFraFil(filnavn);
+		return fa;
+	}
+
+	public int lesInt() {
+		int resultat = 0;
+		boolean lestOk = false;
+
+		while(!lestOk) {
+			String linje = sc.nextLine();
+
+			try {
+				resultat = Integer.parseInt(linje);
+				lestOk = true;
+			} catch(NumberFormatException e) {
+				System.out.print("Ugyldig input, oppgi et heltall: ");
+			}
+		}
+
+		return resultat;
 	}
 
 }
