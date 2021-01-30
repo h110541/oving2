@@ -23,13 +23,28 @@ public class Tekstgrensesnitt {
 		String tittel = sc.nextLine();
 		System.out.print("Årstall: ");
 		int aarstall = lesInt();
-		System.out.print("Sjanger: ");
-		Sjanger sjanger = Sjanger.valueOf(sc.nextLine().toUpperCase());
+		Sjanger sjanger = lesSjanger();
 		System.out.print("Filmselskap: ");
 		String filmselskap = sc.nextLine();
 		System.out.println();
 
 		return new Film(filmnr, produsent, tittel, aarstall, sjanger, filmselskap);
+	}
+
+	// Hjelpemetode til lesFilm(), sjekker om innlest sjanger er gyldig
+	private Sjanger lesSjanger() {
+		Sjanger resultat = null;
+
+		while(resultat == null) {
+			System.out.print("Sjanger: ");
+			resultat = Sjanger.finnSjanger(sc.nextLine());
+
+			if(resultat == null) {
+				System.out.println("Ugyldig sjanger\n");
+			}
+		}
+
+		return resultat;
 	}
 
 	public void slettFilm(FilmarkivADT fa) {
